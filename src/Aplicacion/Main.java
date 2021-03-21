@@ -6,11 +6,13 @@ import com.qoppa.pdfWriter.PDFDocument;
 import com.qoppa.pdfWriter.PDFPage;
 
 import java.awt.*;
+import java.awt.image.BufferedImage;
 import java.awt.print.PageFormat;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
+import javax.imageio.ImageIO;
 
 public class Main {
     public static void main(String[] args) {
@@ -130,7 +132,9 @@ public class Main {
                             PDFDocument pdf = new PDFDocument();
                             PDFPage pagina = pdf.createPage(new PageFormat());
                             Graphics2D graphics2D = pagina.createGraphics();
-                            graphics2D.drawString("Calificaciones de los alumnos:", 100, 100);
+                            //BufferedImage logo = ImageIO.read(new File("src\\img\\LogoUady.png"));
+                            //graphics2D.drawImage(logo, 0, 0, null);
+                            graphics2D.drawString("Calificaciones de los alumnossss:", 100, 100);
                             graphics2D.drawString("Matricula || Nombre Completo || Calificación", 100, 125);
                             for (int i = 0; i < listaAlumnos.size(); i++){
                                 coords+=25;

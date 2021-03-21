@@ -10,12 +10,20 @@ import Modelo.Excepciones.EntradaInvalidaExcepcion;
 import Modelo.TbCalifs;
 import com.qoppa.pdfWriter.PDFDocument;
 import com.qoppa.pdfWriter.PDFPage;
+import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics2D;
+import java.awt.image.BufferedImage;
 import java.awt.print.PageFormat;
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import javax.imageio.ImageIO;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -164,14 +172,38 @@ public class FrmCalificaciones extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCSVActionPerformed
 
     private void btnPDFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPDFActionPerformed
-        /*PDFDocument pdf = new PDFDocument();
+        try{
+        Date date = new Date();
+        DateFormat formatoHora = new SimpleDateFormat("HH:mm");
+        DateFormat formatoFecha = new SimpleDateFormat("dd/MM/yyyy");
+        PDFDocument pdf = new PDFDocument();
         PDFPage pagina = pdf.createPage(new PageFormat());
         Graphics2D graphics2D = pagina.createGraphics();
-        graphics2D.drawString("Calificaciones de los alumnos:", 100, 100);
-        graphics2D.drawString("Matricula || Nombre Completo || Calificación", 100, 125);
+        graphics2D.drawString("Fecha: " + formatoFecha.format(date) + ",  Hora:" + formatoHora.format(date), 80, 100);
+        BufferedImage image = ImageIO.read(new File("src\\img\\LogoUady.png"));
+        graphics2D.setFont(new Font("Helvetica", Font.BOLD, 20));
+        graphics2D.drawString("Calificaciones de los alumnos", 150, 130);
+        graphics2D.drawImage(image, 250, 155, 110, 180, rootPane);
+        graphics2D.setFont(new Font("Helvetica", Font.PLAIN, 12));
+        graphics2D.drawString("Matricula, Nombre Completo, Calificación", 80, 360);
+        int y = 360;
         for (int i = 0; i < listaAlumnos.size(); i++){
-            
-        }*/
+            y+=25;
+            graphics2D.setColor(Color.darkGray);
+            graphics2D.drawString((i+1)+". ",80, y);
+            if(listaAlumnos.get(i).getCalif()==0)
+                graphics2D.drawString(listaAlumnos.get(i).getMatricula() + ", " + listaAlumnos.get(i).getNombres() + " " +
+                listaAlumnos.get(i).getApellidoPaterno() + " " + listaAlumnos.get(i).getApellidoMaterno() + ", " + "S/C",95,y);
+            else
+                graphics2D.drawString(listaAlumnos.get(i).getMatricula() + ", " + listaAlumnos.get(i).getNombres() + " " +
+                listaAlumnos.get(i).getApellidoPaterno() + " " + listaAlumnos.get(i).getApellidoMaterno() + ", " + listaAlumnos.get(i).getCalif(),95,y);
+        }
+        pdf.addPage(pagina);
+        pdf.saveDocument("calificaciones.pdf");
+        JOptionPane.showMessageDialog(rootPane, "Se ha generado el PDF con las calificaciones");
+        }catch(IOException e1){
+            JOptionPane.showMessageDialog(rootPane, "Problemas con la creación del PDF");
+        }
     }//GEN-LAST:event_btnPDFActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
