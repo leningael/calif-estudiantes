@@ -24,6 +24,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import javax.imageio.ImageIO;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -155,8 +156,11 @@ public class FrmCalificaciones extends javax.swing.JFrame {
 
     private void btnCSVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCSVActionPerformed
         // TODO add your handling code here:
+        JFileChooser jfc = new JFileChooser();
+        jfc.showSaveDialog(jfc);
         try{
-            FileWriter nuevoCSV = new FileWriter("src\\califs.csv");
+            String ruta = jfc.getSelectedFile().getAbsolutePath();
+            FileWriter nuevoCSV = new FileWriter(ruta+".csv");
             PrintWriter escribir = new PrintWriter(nuevoCSV);
             for (int i = 0; i < listaAlumnos.size(); i++){
                 if(listaAlumnos.get(i).getCalif()==0)
@@ -172,6 +176,8 @@ public class FrmCalificaciones extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCSVActionPerformed
 
     private void btnPDFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPDFActionPerformed
+        JFileChooser jfc = new JFileChooser();
+        jfc.showSaveDialog(jfc);
         try{
         Date date = new Date();
         DateFormat formatoHora = new SimpleDateFormat("HH:mm");
@@ -199,7 +205,8 @@ public class FrmCalificaciones extends javax.swing.JFrame {
                 listaAlumnos.get(i).getApellidoPaterno() + " " + listaAlumnos.get(i).getApellidoMaterno() + ", " + listaAlumnos.get(i).getCalif(),95,y);
         }
         pdf.addPage(pagina);
-        pdf.saveDocument("calificaciones.pdf");
+        String ruta = jfc.getSelectedFile().getAbsolutePath();
+        pdf.saveDocument(ruta+".pdf");
         JOptionPane.showMessageDialog(rootPane, "Se ha generado el PDF con las calificaciones");
         }catch(IOException e1){
             JOptionPane.showMessageDialog(rootPane, "Problemas con la creación del PDF");

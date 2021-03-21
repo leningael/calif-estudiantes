@@ -10,6 +10,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 import java.util.Vector;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
@@ -38,8 +39,11 @@ public class TbCalifs {
         tabla.setModel(modelo);
     }
     public void lecturaAlumnos(){
+        JFileChooser jfc = new JFileChooser();
+        jfc.showOpenDialog(jfc);
         try{
-            File CSV = new File("src\\lista.csv");
+            String ruta = jfc.getSelectedFile().getAbsolutePath();
+            File CSV = new File(ruta);
             Scanner scArchivo = new Scanner(CSV);
             while (scArchivo.hasNextLine()) {
                 String datosAlumno = scArchivo.nextLine();

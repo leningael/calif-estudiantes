@@ -11,6 +11,7 @@ import Modelo.Excepciones.EntradaInvalidaExcepcion;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 
 /**
@@ -87,7 +88,7 @@ public class FrmLogin extends javax.swing.JFrame {
     
     private void lecturaCuentas(){
         try{
-            File login = new File("src\\login.csv");
+            File login = new File("src\\archivos\\login.csv");
             Scanner scLogin = new Scanner(login);
             while(scLogin.hasNextLine()){
                 String datosCuenta = scLogin.nextLine();
