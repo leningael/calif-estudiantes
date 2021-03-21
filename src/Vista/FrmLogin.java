@@ -108,6 +108,7 @@ public class FrmLogin extends javax.swing.JFrame {
             }
             scLogin.close();
         }catch(FileNotFoundException e1){
+            JOptionPane.showMessageDialog(rootPane, "Problemas con el archivo de entrada.");
             e1.printStackTrace();
         }
     }

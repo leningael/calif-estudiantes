@@ -6,14 +6,14 @@ public class Alumno {
     private String apellidoMaterno;
     private String nombres;
     private String asignatura;
-    private int calif;
+    private double calif;
 
     public Alumno(String matricula, String apellidoPaterno, String apellidoMaterno, String nombres) {
         this.matricula = matricula;
         this.apellidoPaterno = apellidoPaterno;
         this.apellidoMaterno = apellidoMaterno;
         this.nombres = nombres;
-        this.asignatura = "Diseño de Software";
+        this.asignatura = "Disenio de Software";
     }
 
     public String getMatricula() {
@@ -48,11 +48,11 @@ public class Alumno {
         this.nombres = nombres;
     }
 
-    public int getCalif() {
+    public double getCalif() {
         return calif;
     }
 
-    public void setCalif(int calif) {
+    public void setCalif(double calif) {
         this.calif = calif;
     }
 

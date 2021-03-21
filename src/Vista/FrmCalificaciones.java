@@ -8,6 +8,14 @@ package Vista;
 import static Aplicacion.EstudiantesCSVInicio.listaAlumnos;
 import Modelo.Excepciones.EntradaInvalidaExcepcion;
 import Modelo.TbCalifs;
+import com.qoppa.pdfWriter.PDFDocument;
+import com.qoppa.pdfWriter.PDFPage;
+import java.awt.Graphics2D;
+import java.awt.print.PageFormat;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -45,7 +53,6 @@ public class FrmCalificaciones extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setLocation(new java.awt.Point(500, 100));
-        setMaximumSize(new java.awt.Dimension(580, 550));
         setMinimumSize(new java.awt.Dimension(580, 550));
         setResizable(false);
         setSize(new java.awt.Dimension(580, 550));
@@ -110,20 +117,16 @@ public class FrmCalificaciones extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnCSVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCSVActionPerformed
-        // TODO add your handling code here:
-        
-    }//GEN-LAST:event_btnCSVActionPerformed
-
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
         // TODO add your handling code here:
         String calif;
         int flag = 0;
+        ArrayList<Double> califTemp = new ArrayList<Double>();
         DefaultTableModel tb = (DefaultTableModel) tblCalifs.getModel();
             for(int i = 0; i < this.tblCalifs.getRowCount();i++){
                 calif = String.valueOf(tb.getValueAt(i,3));
                 try{
-                    if(Integer.parseInt(calif)<0 || Integer.parseInt(calif)>100)
+                    if(Double.parseDouble(calif)<0 || Double.parseDouble(calif)>100)
                         throw new EntradaInvalidaExcepcion("Debe ingresar un número positivo como calificación");
                 }catch(NumberFormatException e1){
                     calif = "0";
@@ -131,20 +134,44 @@ public class FrmCalificaciones extends javax.swing.JFrame {
                     flag = 1;
                     JOptionPane.showMessageDialog(rootPane, e2.getMessage());
                 }
+                califTemp.add(Double.parseDouble(calif));
             }
             if(flag == 0){
-                for(int i = 0; i < this.tblCalifs.getRowCount();i++){
-                    calif = String.valueOf(tb.getValueAt(i,3));
-                    listaAlumnos.get(i).setCalif(Integer.parseInt(calif));
-                }  
+                for(int i = 0; i < califTemp.size();i++)
+                    listaAlumnos.get(i).setCalif(califTemp.get(i));
                 JOptionPane.showMessageDialog(rootPane, "Las calificaciones han sido registradas");
             }
             /*for(int i = 0; i < this.tblCalifs.getRowCount();i++)
                 System.out.println("calif "+ i + " es: " + listaAlumnos.get(i).getCalif());*/
     }//GEN-LAST:event_btnGuardarActionPerformed
 
-    private void btnPDFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPDFActionPerformed
+    private void btnCSVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCSVActionPerformed
         // TODO add your handling code here:
+        try{
+            FileWriter nuevoCSV = new FileWriter("src\\califs.csv");
+            PrintWriter escribir = new PrintWriter(nuevoCSV);
+            for (int i = 0; i < listaAlumnos.size(); i++){
+                if(listaAlumnos.get(i).getCalif()==0)
+                    escribir.println(listaAlumnos.get(i).getMatricula() + "," + listaAlumnos.get(i).getAsignatura() + "," + "S/C");
+                else
+                    escribir.println(listaAlumnos.get(i).getMatricula() + "," + listaAlumnos.get(i).getAsignatura() + "," + listaAlumnos.get(i).getCalif());
+            }
+            nuevoCSV.close();
+            JOptionPane.showMessageDialog(rootPane, "Se ha generado el archivo CSV con las calificaciones");
+        }catch(IOException e1){
+            JOptionPane.showMessageDialog(rootPane, "Problemas con la creación del archivo de salida");
+        }
+    }//GEN-LAST:event_btnCSVActionPerformed
+
+    private void btnPDFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPDFActionPerformed
+        /*PDFDocument pdf = new PDFDocument();
+        PDFPage pagina = pdf.createPage(new PageFormat());
+        Graphics2D graphics2D = pagina.createGraphics();
+        graphics2D.drawString("Calificaciones de los alumnos:", 100, 100);
+        graphics2D.drawString("Matricula || Nombre Completo || Calificación", 100, 125);
+        for (int i = 0; i < listaAlumnos.size(); i++){
+            
+        }*/
     }//GEN-LAST:event_btnPDFActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
