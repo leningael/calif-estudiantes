@@ -28,7 +28,7 @@ public class Main {
                     System.out.println("Ingrese la clave para poder registrar una cuenta:");
                     String clave = sc.nextLine();
                     if(clave.equals("registro2020")){
-                        FileWriter registroCSV = new FileWriter("src\\login.csv", true);
+                        FileWriter registroCSV = new FileWriter("src\\archivos\\login.csv", true);
                         PrintWriter escribir = new PrintWriter(registroCSV);
                         System.out.println("Ingrese el usuario");
                         String usuario = sc.nextLine();
@@ -49,7 +49,7 @@ public class Main {
                 }
                 if(op==2){
                     ArrayList<Cuenta> listaCuentas = new ArrayList<Cuenta>();
-                    File login = new File("src\\login.csv");
+                    File login = new File("src\\archivos\\login.csv");
                     //LOGIN
                     Scanner scLogin = new Scanner(login);
                     while (scLogin.hasNextLine()) {
@@ -86,7 +86,7 @@ public class Main {
                         //Lista alumnos
                         int calif;
                         ArrayList<Alumno> listaAlumnos = new ArrayList<Alumno>();
-                        File CSV = new File("src\\lista.csv");
+                        File CSV = new File("src\\archivos\\lista.csv");
                         Scanner scArchivo = new Scanner(CSV);
                         while (scArchivo.hasNextLine()) {
                             String datosAlumno = scArchivo.nextLine();
@@ -115,7 +115,7 @@ public class Main {
                         System.out.println("¿Desea generar un archivo CSV de las calificaciones?\n1. Si, 2. No");
                         op = sc.nextInt();
                         if (op == 1) {
-                            FileWriter nuevoCSV = new FileWriter("src\\califs.csv");
+                            FileWriter nuevoCSV = new FileWriter("src\\archivos\\califs.csv");
                             PrintWriter escribir = new PrintWriter(nuevoCSV);
                             for (int i = 0; i < listaAlumnos.size(); i++){
                                 if(listaAlumnos.get(i).getCalif()==-1)

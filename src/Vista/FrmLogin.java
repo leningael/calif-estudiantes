@@ -99,7 +99,11 @@ public class FrmLogin extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
     
     private void lecturaCuentas(){
+        /*JFileChooser jfc = new JFileChooser();
+        jfc.showOpenDialog(jfc);*/
         try{
+            /*String ruta = jfc.getSelectedFile().getAbsolutePath();
+            File login = new File(ruta);*/
             File login = new File("src\\archivos\\login.csv");
             Scanner scLogin = new Scanner(login);
             while(scLogin.hasNextLine()){
