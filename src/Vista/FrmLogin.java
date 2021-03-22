@@ -38,6 +38,7 @@ public class FrmLogin extends javax.swing.JFrame {
 
         txtUsuario = new javax.swing.JTextField();
         txtPassword = new javax.swing.JPasswordField();
+        btnRegistrarse = new javax.swing.JButton();
         btnLogin = new javax.swing.JButton();
         lbFondo = new javax.swing.JLabel();
 
@@ -68,6 +69,17 @@ public class FrmLogin extends javax.swing.JFrame {
         getContentPane().add(txtPassword);
         txtPassword.setBounds(130, 312, 320, 40);
 
+        btnRegistrarse.setBorderPainted(false);
+        btnRegistrarse.setContentAreaFilled(false);
+        btnRegistrarse.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnRegistrarse.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRegistrarseActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnRegistrarse);
+        btnRegistrarse.setBounds(120, 370, 100, 30);
+
         btnLogin.setBorderPainted(false);
         btnLogin.setContentAreaFilled(false);
         btnLogin.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -77,7 +89,7 @@ public class FrmLogin extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnLogin);
-        btnLogin.setBounds(210, 422, 160, 40);
+        btnLogin.setBounds(210, 420, 160, 40);
 
         lbFondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/FrmLogin.png"))); // NOI18N
         getContentPane().add(lbFondo);
@@ -141,6 +153,12 @@ public class FrmLogin extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtUsuarioActionPerformed
 
+    private void btnRegistrarseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarseActionPerformed
+        // TODO add your handling code here:
+        new FrmRegistro().setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnRegistrarseActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -178,6 +196,7 @@ public class FrmLogin extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnLogin;
+    private javax.swing.JButton btnRegistrarse;
     private javax.swing.JLabel lbFondo;
     private javax.swing.JPasswordField txtPassword;
     private javax.swing.JTextField txtUsuario;
